@@ -7,6 +7,7 @@ import { HeroListPageComponent } from './pages/hero-list-page/hero-list-page.com
 import { NewHeroPageComponent } from './pages/new-hero-page/new-hero-page.component';
 import { HeroSearchPageComponent } from './pages/hero-search-page/hero-search-page.component';
 import { HeroMainPageComponent } from './pages/hero-main-page/hero-main-page.component';
+import { MaterialModule } from '../material/material.module';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,6 @@ import { HeroMainPageComponent } from './pages/hero-main-page/hero-main-page.com
     HeroSearchPageComponent,
     HeroMainPageComponent,
   ],
-  imports: [CommonModule, HeroesRoutingModule],
+  imports: [CommonModule, HeroesRoutingModule, MaterialModule],
 })
 export class HeroesModule {}
