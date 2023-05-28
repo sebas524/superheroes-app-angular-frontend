@@ -1,1 +1,38 @@
-<p>hero-main-page works!</p>
+<!-- ! -->
+<div class="grid mt-2 p-2 justify-content-center">
+  <mat-card class="col-12 sm:col-4 mr-4">
+    <mat-card-header>
+      <mat-card-title>{{ hero?.superhero | titlecase }}</mat-card-title>
+      <mat-card-subtitle>{{ hero?.alterEgo }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <!-- ? image: -->
+    <img class="img-main" [src]="hero! | myImg" [alt]="hero?.superhero" />
+  </mat-card>
+  <mat-card class="col-12 sm:col-4">
+    <mat-card-header>
+      <mat-card-title>Information</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-card-subtitle class="mt-5">Hero Name</mat-card-subtitle>
+      <p>{{ hero?.superhero | titlecase }}</p>
+      <mat-card-subtitle class="mt-5">Alter Ego</mat-card-subtitle>
+      <p>{{ hero?.alterEgo }}</p>
+      <mat-card-subtitle class="mt-5">Publisher</mat-card-subtitle>
+      <p>{{ hero?.publisher }}</p>
+      <mat-card-subtitle class="mt-5">First Appeareance</mat-card-subtitle>
+
+      <p>
+        {{ hero?.firstAppearance }}
+        <mat-card-subtitle class="mt-5">Characters</mat-card-subtitle>
+
+        <mat-chip-listbox *ngFor="let name of hero?.characters?.split(',')">
+          <mat-chip>{{ name }}</mat-chip></mat-chip-listbox
+        >
+      </p>
+      <button mat-button mat-flat-button color="primary" routerLink="/heroes">
+        Go Back
+      </button>
+    </mat-card-content>
+  </mat-card>
+</div>

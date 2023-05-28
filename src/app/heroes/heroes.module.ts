@@ -10,6 +10,7 @@ import { HeroMainPageComponent } from './pages/hero-main-page/hero-main-page.com
 import { MaterialModule } from '../material/material.module';
 import { CardComponent } from './components/card/card.component';
 import { RouterModule } from '@angular/router';
+import { MyImgPipe } from './pipes/my-img.pipe';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { RouterModule } from '@angular/router';
     HeroSearchPageComponent,
     HeroMainPageComponent,
     CardComponent,
+    MyImgPipe,
   ],
   imports: [CommonModule, HeroesRoutingModule, MaterialModule, RouterModule],
 })

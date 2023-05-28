@@ -48,6 +48,17 @@ a:visited {
   height: 320px; /* Set the desired image height */
 }
 
+.img-main {
+  transition: all 0.15s linear;
+  position: relative;
+  /* top: -40%; */
+  /* left: -1%; */
+  filter: brightness(70%);
+  background-size: cover;
+  background-position: center;
+  height: 550px; /* Set the desired image height */
+}
+
 /* .custom-card-title {
   position: absolute;
   top: 10px;
