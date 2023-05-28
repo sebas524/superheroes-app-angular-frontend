@@ -19,3 +19,42 @@ a:visited {
 .example-spacer {
   flex: 1 1 auto;
 }
+
+/* ! CARD */
+.custom-card {
+  /* min-width: 260px; */
+  max-width: 300px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: relative;
+  margin: 10px auto;
+  /* cursor: pointer; */
+  display: inline-block;
+}
+
+.content {
+  height: 190px;
+}
+
+.custom-card img {
+  transition: all 0.15s linear;
+  position: relative;
+  /* top: -40%; */
+  /* left: -1%; */
+  filter: brightness(70%);
+  background-size: cover;
+  background-position: center;
+  height: 320px; /* Set the desired image height */
+}
+
+/* .custom-card-title {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 25px;
+  font-weight: bold;
+  color: #fff;
+  padding: 15px 20px;
+  transition: all 0.15s linear;
+} */
