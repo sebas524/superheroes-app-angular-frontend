@@ -7,6 +7,6 @@ export interface HeroInterface {
   alterEgo: string;
   firstAppearance: string;
   characters: string;
-  photo: string;
+  photo?: string;
   // __v:             number;
 }

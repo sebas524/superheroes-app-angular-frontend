@@ -11,6 +11,7 @@ import { MaterialModule } from '../material/material.module';
 import { CardComponent } from './components/card/card.component';
 import { RouterModule } from '@angular/router';
 import { MyImgPipe } from './pipes/my-img.pipe';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,12 @@ import { MyImgPipe } from './pipes/my-img.pipe';
     CardComponent,
     MyImgPipe,
   ],
-  imports: [CommonModule, HeroesRoutingModule, MaterialModule, RouterModule],
+  imports: [
+    CommonModule,
+    HeroesRoutingModule,
+    MaterialModule,
+    RouterModule,
+    ReactiveFormsModule,
+  ],
 })
 export class HeroesModule {}

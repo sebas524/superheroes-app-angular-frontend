@@ -23,4 +23,10 @@ export class HeroesService {
       })
     );
   }
+
+  getHeroesByLetter(letter: string): Observable<HeroInterface[]> {
+    return this.http.get<HeroInterface[]>(
+      `${this.baseUrl}/hero?letter=${letter}`
+    );
+  }
 }
