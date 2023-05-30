@@ -13,7 +13,7 @@
     >
       <ng-container *ngIf="heroes.length > 0; else noResults">
         <mat-option *ngFor="let hero of heroes" [value]="hero.superhero">
-          {{ hero.superhero }}
+          {{ hero.superhero | titlecase }}
         </mat-option>
       </ng-container>
 

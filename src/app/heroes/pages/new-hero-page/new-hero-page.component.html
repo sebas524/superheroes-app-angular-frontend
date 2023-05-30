@@ -1,33 +1,72 @@
-<h1>Add Hero <small>(name)</small></h1>
+<h1>
+  {{ currentHero._id ? "Edit" : "Add" }}
+  <small>hero: {{ currentHero.superhero | titlecase }}</small>
+</h1>
 <mat-divider class="mb-2"></mat-divider>
 <div class="grid">
   <!-- * div 1 -->
   <div class="col-12 sm:col-6">
     <mat-card>
       <mat-card-content>
-        <div class="grid">
+        <form [formGroup]="myForm" (ngSubmit)="onSave()" class="grid">
           <mat-form-field class="col-12 sm:col-6">
             <mat-label>Super heroe</mat-label>
-            <input matInput type="text" />
+            <input matInput type="text" formControlName="superhero" />
+
+            <!-- ! validator -->
+            <mat-error
+              *ngIf="myForm.controls['superhero'].errors?.['required']"
+              >{{ getErrorMessage() }}</mat-error
+            >
+
+            <!-- ! -->
           </mat-form-field>
           <mat-form-field class="col-12 sm:col-6">
             <mat-label>Alter ego</mat-label>
-            <input matInput type="text" />
+            <input matInput type="text" formControlName="alterEgo" />
+            <!-- ! validator -->
+            <mat-error
+              *ngIf="myForm.controls['alterEgo'].errors?.['required']"
+              >{{ getErrorMessage() }}</mat-error
+            >
+
+            <!-- ! -->
           </mat-form-field>
           <!-- *this one is only 12 col: -->
           <mat-form-field class="col-12">
-            <mat-label>First Appereance</mat-label>
-            <input matInput type="text" />
+            <mat-label>First Appearance</mat-label>
+            <input matInput type="text" formControlName="firstAppearance" />
+            <!-- ! validator -->
+            <mat-error
+              *ngIf="myForm.controls['firstAppearance'].errors?.['required']"
+              >{{ getErrorMessage() }}</mat-error
+            >
+
+            <!-- ! -->
           </mat-form-field>
           <!-- *this one is only 12 col: -->
           <mat-form-field class="col-12">
             <mat-label>Characters</mat-label>
-            <input matInput type="text" />
+            <input matInput type="text" formControlName="characters" />
+            <!-- ! validator -->
+            <mat-error
+              *ngIf="myForm.controls['characters'].errors?.['required']"
+              >{{ getErrorMessage() }}</mat-error
+            >
+
+            <!-- ! -->
           </mat-form-field>
           <!-- *this one is only 12 col: -->
           <mat-form-field class="col-12">
             <mat-label>Creator/Publisher</mat-label>
-            <input matInput type="text" />
+            <input matInput type="text" formControlName="publisher" />
+            <!-- ! validator -->
+            <mat-error
+              *ngIf="myForm.controls['publisher'].errors?.['required']"
+              >{{ getErrorMessage() }}</mat-error
+            >
+
+            <!-- ! -->
 
             <!-- ! selector instead of input:
             <mat-select>
@@ -37,15 +76,24 @@
           <!-- *this one is only 12 col: -->
           <mat-form-field class="col-12">
             <mat-label>Image URL</mat-label>
-            <input matInput type="text" />
+            <input matInput type="text" formControlName="photo" />
           </mat-form-field>
           <!-- * buttons -->
-          <button mat-flat-button color="warn">Delete</button>
+          <button
+            type="button"
+            mat-flat-button
+            color="warn"
+            *ngIf="currentHero._id"
+            (click)="onDelete()"
+          >
+            Delete
+          </button>
+          <span>.</span>
           <span class="example-spacer"></span>
           <button mat-flat-button color="primary">
             <mat-icon>save</mat-icon> Save
           </button>
-        </div>
+        </form>
       </mat-card-content>
     </mat-card>
   </div>
@@ -53,7 +101,8 @@
   <div class="col-12 sm:col-6">
     <mat-card>
       <!-- * here you put whatever you want. in the example there's an image. but you could add here ex: todo's -->
-      <img class="img-main" src="/assets/no-image.jpeg" alt="hero image" />
+
+      <img class="img-main" [src]="currentHero | myImg" alt="hero image" />
     </mat-card>
   </div>
 </div>

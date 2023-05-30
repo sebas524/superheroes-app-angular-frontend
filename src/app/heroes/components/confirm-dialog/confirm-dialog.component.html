@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>Want to delete this entry?</h1>
+<div mat-dialog-content>
+  <p>
+    Once {{ data.superhero }} gets deleted, changes cannot be undone and you
+    will lose data for all eternity. Are you sure?
+  </p>
+</div>
+<div mat-dialog-actions>
+  <button mat-flat-button (click)="onNoClick()">No Thanks</button>
+  <span class="example-spacer"></span>
+  <button mat-flat-button color="warn" (click)="onConfirm()" cdkFocusInitial>
+    Ok
+  </button>
+</div>

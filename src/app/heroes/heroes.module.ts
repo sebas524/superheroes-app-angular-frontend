@@ -12,6 +12,7 @@ import { CardComponent } from './components/card/card.component';
 import { RouterModule } from '@angular/router';
 import { MyImgPipe } from './pipes/my-img.pipe';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     HeroMainPageComponent,
     CardComponent,
     MyImgPipe,
+    ConfirmDialogComponent,
   ],
   imports: [
     CommonModule,
