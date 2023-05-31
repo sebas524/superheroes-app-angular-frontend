@@ -24,11 +24,11 @@ export class HeroesService {
   }
 
   getHeroes(): Observable<HeroInterface[]> {
-    return this.http.get<HeroInterface[]>(`${this.baseUrl}/hero`);
+    return this.http.get<HeroInterface[]>(`${this.baseUrl}/api/hero`);
   }
 
   getHeroById(id: string): Observable<HeroInterface | undefined> {
-    return this.http.get<HeroInterface>(`${this.baseUrl}/hero/${id}`).pipe(
+    return this.http.get<HeroInterface>(`${this.baseUrl}/api/hero/${id}`).pipe(
       // * if invalid id, then that would return to us the assigned error from the backend. but we need to  return  an observable, therefore:
       catchError((err) => {
         return of(undefined);
@@ -38,14 +38,14 @@ export class HeroesService {
 
   getHeroesByLetter(letter: string): Observable<HeroInterface[]> {
     return this.http.get<HeroInterface[]>(
-      `${this.baseUrl}/hero?letter=${letter}`
+      `${this.baseUrl}/api/hero?letter=${letter}`
     );
   }
 
   addCharacter(hero: HeroInterface): Observable<HeroInterface> {
     // * , hero will act as my Body (think of postman!!).
     return this.http.post<HeroInterface>(
-      `${this.baseUrl}/hero`,
+      `${this.baseUrl}/api/hero`,
       this.heroWithOutIdProp(hero)
     );
   }
@@ -57,14 +57,14 @@ export class HeroesService {
 
     // * , hero will act as my Body (think of postman!!).
     return this.http.patch<HeroInterface>(
-      `${this.baseUrl}/hero/${hero._id}`,
+      `${this.baseUrl}/api/hero/${hero._id}`,
       this.heroWithOutIdProp(hero)
     );
   }
 
   deleteCharacter(superheroName: string): Observable<boolean> {
     // * , hero will act as my Body (think of postman!!).
-    return this.http.delete(`${this.baseUrl}/hero/${superheroName}`).pipe(
+    return this.http.delete(`${this.baseUrl}/api/hero/${superheroName}`).pipe(
       map((res) => {
         return true;
       }),

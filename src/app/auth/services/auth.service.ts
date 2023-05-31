@@ -48,7 +48,7 @@ export class AuthService {
   // ! TO REGISTER:
 
   register(name: string, email: string, password: string): Observable<boolean> {
-    const url = `${this.baseUrl}/authentication/register`;
+    const url = `${this.baseUrl}/api/authentication/register`;
     const body = {
       name: name,
       email: email,
@@ -70,7 +70,7 @@ export class AuthService {
   // ! TO AUTHENTICATE:
 
   login(email: string, password: string): Observable<boolean> {
-    const url = `${this.baseUrl}/authentication/authenticate`;
+    const url = `${this.baseUrl}/api/authentication/authenticate`;
     // * think of body you use to send info to backend in postman:
     const body = { email: email, password: password };
 
@@ -97,7 +97,7 @@ export class AuthService {
   // ! TO CHECK TOKEN:
 
   checkStatus(): Observable<boolean> {
-    const url = `${this.baseUrl}/authentication/check-token`;
+    const url = `${this.baseUrl}/api/authentication/check-token`;
     const token = localStorage.getItem('heroesToken');
 
     if (!token) {
