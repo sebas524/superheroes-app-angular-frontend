@@ -33,5 +33,7 @@ export class RegisterPageComponent {
   //   return 'You must enter a value';
   // }
 
-  onLogin() {}
+  onRegister() {
+    console.log(this.myForm.value);
+  }
 }
