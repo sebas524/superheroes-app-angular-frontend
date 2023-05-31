@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ValidatorService } from '../../services/validator.service';
+
 import { HeroesService } from '../../services/heroes.service';
 import { HeroInterface } from '../../interfaces/hero.interface';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -15,7 +15,7 @@ import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-
   styleUrls: ['./new-hero-page.component.css'],
 })
 export class NewHeroPageComponent implements OnInit {
-  private validatorService = inject(ValidatorService);
+  // private validatorService = inject(ValidatorService);
 
   private fb = inject(FormBuilder);
   private heroesService = inject(HeroesService);

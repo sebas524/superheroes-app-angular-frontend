@@ -1,21 +1,46 @@
-<div class="flex flex-column">
+<form class="flex flex-column" [formGroup]="myForm" (ngSubmit)="onLogin()">
   <span class="text-lg mb-4">Register</span>
   <mat-form-field>
     <mat-label>User</mat-label>
-    <input type="text" matInput placeholder="Username" />
+    <input type="text" matInput placeholder="Username" formControlName="name" />
+    <!-- ! validator -->
+    <mat-error *ngIf="myForm.controls['name'].errors?.['required']">
+      name must be at least one character long</mat-error
+    >
+
+    <!-- ! -->
   </mat-form-field>
   <mat-form-field>
     <mat-label>Email</mat-label>
-    <input type="text" matInput placeholder="Email" />
+    <input type="text" matInput placeholder="Email" formControlName="email" />
+    <!-- ! validator -->
+    <mat-error
+      *ngIf="myForm.controls['email'].errors?.['required'] || myForm.controls['email'].errors?.['pattern']"
+      >email must have proper format ex: ...@gmail.com</mat-error
+    >
+
+    <!-- ! -->
   </mat-form-field>
   <mat-form-field>
     <mat-label>Password</mat-label>
-    <input type="password" matInput placeholder="Password" />
+    <input
+      type="password"
+      matInput
+      placeholder="Password"
+      formControlName="password"
+    />
+    <!-- ! validator -->
+    <mat-error
+      *ngIf="myForm.controls['password'].errors?.['required']|| myForm.controls['password'].errors?.['minlength']"
+      >password must be at least 6 characters long</mat-error
+    >
+
+    <!-- ! -->
   </mat-form-field>
-  <button mat-button mat-flat-button color="primary">
+  <button mat-button mat-flat-button color="primary" class="mt-2">
     Register <mat-icon>assignment</mat-icon>
   </button>
   <div class="flex justify-content-end mt-5">
     <a routerLink="/auth/login">Already have an account? Click here!</a>
   </div>
-</div>
+</form>
