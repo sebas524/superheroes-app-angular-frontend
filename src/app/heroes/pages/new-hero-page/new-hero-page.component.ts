@@ -102,8 +102,6 @@ export class NewHeroPageComponent implements OnInit {
 
           // * navigate to updated hero:
           this.router.navigate(['/heroes', hero.superhero]);
-
-          //TODO: SHOW SNACKBAR
         });
     }
 

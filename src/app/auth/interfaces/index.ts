@@ -1,3 +1,4 @@
+export * from './register-res.interface';
 export * from './check-token-res.interface';
 export * from './auth-status.enum';
 export * from './user.interface';
