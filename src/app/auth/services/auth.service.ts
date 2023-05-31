@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, computed, inject, signal } from '@angular/core';
-import { Observable, catchError, map, tap, throwError } from 'rxjs';
+import { Observable, catchError, map, of, tap, throwError } from 'rxjs';
 import { environments } from 'src/app/environments/environments';
-import { AuthStatus, LoginRes, User } from '../interfaces';
+import { AuthStatus, CheckTokenRes, LoginRes, User } from '../interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +23,24 @@ export class AuthService {
     return this._authStatus();
   });
 
+  private setAuthInfo(user: User, token: string): boolean {
+    // * we assing this user to the _currentUser variable:
+    this._currentUser.set(user);
+    // * and we change current status as well to authenticated(because here user login was succesful)
+    this._authStatus.set(AuthStatus.authenticated);
+    // * REMEMBER these updated properties will then also update the computed properties as well because they are connected with each other!
+
+    // * token we can storage it in localStorage:
+    localStorage.setItem('heroesToken', token);
+    return true;
+  }
+
+  constructor() {
+    this.checkStatus().subscribe();
+  }
+
+  // ! TO AUTHENTICATE:
+
   login(email: string, password: string): Observable<boolean> {
     const url = `${this.baseUrl}/authentication/authenticate`;
     // * think of body you use to send info to backend in postman:
@@ -30,22 +48,10 @@ export class AuthService {
 
     return this.http.post<LoginRes>(url, body).pipe(
       // * so we know here we have the response.
-      tap(({ user, token }) => {
-        // * we assing this user to the _currentUser variable:
-        this._currentUser.set(user);
-        // * and we change current status as well to authenticated(because here user login was succesful)
-        this._authStatus.set(AuthStatus.authenticated);
-        // * REMEMBER these updated properties will then also update the computed properties as well because they are connected with each other!
-
-        // * token we can storage it in localStorage:
-        localStorage.setItem('token', token);
-
-        console.log({ user, token });
+      map(({ user, token }) => {
+        return this.setAuthInfo(user, token);
       }),
-      map(() => {
-        return true;
-        // ! up to here is only in the case that the authentication was succsessfull!!!!!
-      }),
+      // ! up to here is only in the case that the authentication was succsessfull!!!!!
       catchError(
         // todo: errors
 
@@ -58,5 +64,41 @@ export class AuthService {
         }
       )
     );
+  }
+
+  // ! TO CHECK TOKEN:
+
+  checkStatus(): Observable<boolean> {
+    const url = `${this.baseUrl}/authentication/check-token`;
+    const token = localStorage.getItem('heroesToken');
+
+    if (!token) {
+      this.logout();
+      return of(false);
+    }
+
+    // * remmeber that in postman you have headers tab(sidebar) that allows you to check your token. this we are going to do here in code as well:
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    // * --- *
+
+    return this.http.get<CheckTokenRes>(url, { headers: headers }).pipe(
+      map(({ user, token }) => {
+        return this.setAuthInfo(user, token);
+      }),
+      catchError(() => {
+        // * if we have an error, then that means we are not authenticated. therefore:
+        this._authStatus.set(AuthStatus.notAuthenticated);
+        return of(false);
+      })
+    );
+  }
+
+  logout() {
+    // * first delete token in localStorage:
+    localStorage.removeItem('heroesToken');
+    // * change values of auth variables:
+    this._currentUser.set(null);
+    this._authStatus.set(AuthStatus.notAuthenticated);
+    // * rememebr!!! there is no need to redirect to some route because we are already handling that on app.component with the switch case depending on the  auth status!!
   }
 }

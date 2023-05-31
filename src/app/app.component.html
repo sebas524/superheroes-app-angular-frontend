@@ -1,1 +1,14 @@
-<router-outlet></router-outlet>
+<div
+  class="grid p-3 flex-column justify-content-center align-items-center"
+  *ngIf="!finishedCheck()"
+>
+  <div class="col-12 mt-5 md:col-6 md:col-offset-3 md:mt-8">
+    <!-- ! -->
+    <mat-progress-spinner
+      [diameter]="150"
+      [mode]="'indeterminate'"
+    ></mat-progress-spinner>
+  </div>
+</div>
+
+<router-outlet *ngIf="finishedCheck()"></router-outlet>

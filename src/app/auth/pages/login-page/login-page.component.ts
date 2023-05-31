@@ -53,7 +53,7 @@ export class LoginPageComponent {
     this.authService.login(email, password).subscribe({
       // * if everything went well:
       next: () => {
-        return console.log('alles gut');
+        return this.router.navigateByUrl('/heroes');
       },
       // * if not, then error:
       error: (err) => {

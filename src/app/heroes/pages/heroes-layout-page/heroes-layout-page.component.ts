@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 interface sidebarItems {
   label: string;
@@ -12,6 +13,16 @@ interface sidebarItems {
   styleUrls: ['./heroes-layout-page.component.css'],
 })
 export class HeroesLayoutPageComponent {
+  private authService = inject(AuthService);
+  // * with signals:
+  // public user = computed(() => {
+  //   this.authService.currentUser()
+  // })
+  // * with no signals (because this whole module has been done without any signals)
+  get user() {
+    return this.authService.currentUser();
+  }
+
   public myItems: sidebarItems[] = [
     {
       label: 'List',
@@ -29,4 +40,8 @@ export class HeroesLayoutPageComponent {
       url: './search',
     },
   ];
+
+  onLogout() {
+    this.authService.logout();
+  }
 }
