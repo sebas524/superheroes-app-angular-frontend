@@ -2,6 +2,9 @@ import { Component, inject } from '@angular/core';
 import { ValidatorService } from '../../services/validator.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { ErrorBoxComponent } from '../../components/error-box/error-box.component';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -11,6 +14,8 @@ import { AuthService } from '../../services/auth.service';
 export class LoginPageComponent {
   private validatorService = inject(ValidatorService);
   private authService = inject(AuthService);
+  private dialog = inject(MatDialog);
+  private router = inject(Router);
 
   private fb = inject(FormBuilder);
 
@@ -35,15 +40,24 @@ export class LoginPageComponent {
   //   return 'You must enter a value';
   // }
 
+  // * method to activate box opening:
+  openErrorDialog(errorMessage: string) {
+    this.dialog.open(ErrorBoxComponent, {
+      data: { errorMessage },
+    });
+  }
+
   onLogin() {
     console.log('info given => ', this.myForm.value);
     const { email, password } = this.myForm.value;
     this.authService.login(email, password).subscribe({
+      // * if everything went well:
       next: () => {
         return console.log('alles gut');
       },
+      // * if not, then error:
       error: (err) => {
-        return console.log('EEEEERRRRRRRORORRRRR:::', err);
+        return this.openErrorDialog(err);
       },
     });
   }

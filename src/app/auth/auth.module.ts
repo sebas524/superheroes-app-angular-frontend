@@ -7,12 +7,14 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { MaterialModule } from '../material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ErrorBoxComponent } from './components/error-box/error-box.component';
 
 @NgModule({
   declarations: [
     AuthLayoutPageComponent,
     LoginPageComponent,
     RegisterPageComponent,
+    ErrorBoxComponent,
   ],
   imports: [
     CommonModule,
