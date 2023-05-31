@@ -1,3 +1,3 @@
 export const environments = {
-  baseUrl: 'http://localhost:3000/api',
+  baseUrl: 'https://superheroes-app-nestjs-backend-production.up.railway.app/',
 };
